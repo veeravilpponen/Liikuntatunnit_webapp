@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Lisää tunti</title>
+	<style>
+		input {
+		  display: block;
+		  padding: 10px 20px;
+		}
+		form {
+		  max-width:800px;
+		  
+		}
+		.center {
+		    margin: auto;
+		    width: 60%;
+		    padding: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container center">
+		<!--
+		<form action="#" th:action="@{../tallennapaikka}" th:object="${paikka}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin">
+		  	<h1>Lisää uusi liikuntapaikka</h1>
+		  	<br />
+		  	
+		  	<div class="w3-row w3-section">
+			  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-home"></i></div>	
+			    <div class="w3-rest">
+			      <input class="w3-input w3-border" id="nimi" th:field="${paikka.nimi}" placeholder="Liikuntapaikan nimi" type="text">
+			    </div>
+			</div>
+		    
+		    <div style="padding-top:20px" class="w3-center">
+				<input class="btn btn-success" type="submit" value="Tallenna"/>
+				<a class="btn btn-basic w3-section" href="/listaasuoritukset">Peruuta</a>
+			</div>
+		</form>
+		-->
+		<form action="#" th:action="@{../tallennasuoritus}" th:object="${suoritus}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-black w3-margin">
+			<h1>Lisää uusi tunti</h1>
+			<br />
+		  	
+		  	<label for="laji">Laji: </label>
+		  	<div class="w3-row w3-section">
+			  <div class="w3-col" style="width:50px"></div>	
+			    <div class="w3-rest">
+			      <input class="w3-input w3-border" id="laji" th:field="${suoritus.laji}" type="text">
+			    </div>
+			</div>
+			
+			<label for="viikonpaivalista">Viikonpäivä: </label>
+			<div class="w3-row w3-section">
+			  <div class="w3-col" style="width:50px"></div>	
+			    <div class="w3-rest">
+			      <select th:field="${suoritus.viikonpaiva}" class="form-control w3-input w3-border">
+				  	<option th:each="viikonpaiva: ${paivat}" th:value="${viikonpaiva.viikonpaivaId}" th:text="${viikonpaiva.nimi}"></option>
+				  </select>
+			    </div>
+			</div>
+			
+		  	<div style="clear: both; display: block; height: 10px;"></div>
+		  	
+		  	<label for="kulutus">Kulutus: </label>
+		  	<div class="w3-row w3-section">
+			  <div class="w3-col" style="width:50px"></div>	
+			    <div class="w3-rest">
+			      <input class="w3-input w3-border" id="kulutus" th:field="${suoritus.kulutus}" type="number">
+			    </div>
+			</div>
+			
+			<label for="alkamisaika">Alkamisaika: </label>
+		  	<div class="w3-row w3-section">
+			  <div class="w3-col" style="width:50px"></div>	
+			    <div class="w3-rest">
+			      <input class="w3-input w3-border" id="alkamisaika" th:field="${suoritus.alkamisaika}" type="number" pattern="[0-9]+([\.][0-9]+)?" min="0" step="0.01" lang="en">
+			    </div>
+			</div>
+			
+			<label for="loppumisaika">Loppumisaika: </label>
+			<div class="w3-row w3-section">
+			  <div class="w3-col" style="width:50px"></div>	
+			    <div class="w3-rest">
+			      <input class="w3-input w3-border" id="loppumisaika" th:field="${suoritus.loppumisaika}" type="number" pattern="[0-9]+([\.][0-9]+)?" min="0" step="0.01" lang="en">
+			    </div>
+			</div>	
+							
+		  	<label for="paikkalista">Paikka: </label>
+		  	<div class="w3-row w3-section">
+			  <div class="w3-col" style="width:50px"></div>	
+			    <div class="w3-rest">
+			      <select th:field="${suoritus.paikka}" class="form-control w3-input w3-border">
+				     <option th:each="paikka: ${paikat}" th:value="${paikka.paikkaId}" th:text="${paikka.nimi}"></option>
+				  </select>
+			    </div>
+			</div>
+								
+		  	<label for="tarjoajalista">Tarjoaja: </label>
+		  	<div class="w3-row w3-section">
+			  <div class="w3-col" style="width:50px"></div>	
+			    <div class="w3-rest">
+			      <select th:field="${suoritus.tarjoaja}" class="form-control w3-input w3-border">
+				     <option th:each="tarjoaja: ${tarjoajat}" th:value="${tarjoaja.tarjoajaId}" th:text="${tarjoaja.nimi}"></option>
+				  </select>
+			    </div>
+			</div>
+			
+		    <div style="padding:20px 0 20px 0">
+				<input class="btn btn-success" type="submit" value="Tallenna"/>
+				<a class="btn btn-basic" href="/listaasuoritukset">Peruuta</a>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

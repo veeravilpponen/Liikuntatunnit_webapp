@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<title>Lista tunneista</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<style>
+		body {
+			background-color:lightgrey;
+		}
+	</style>
+</head>
+<body>
+	<div class="container center" style="width:80%">
+		<div class="w3-bar w3-black row" style="margin-left:0; align-content:left">
+		  	<p th:inline="text" style="font-size:16px" sec:authorize="hasAuthority('USER')">[[${#httpServletRequest.remoteUser}]] kirjautuneena!</p>
+		  	<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('USER')">
+	            <input type="submit" value="Kirjaudu ulos" class="btn" />
+	        </form>
+	        <p>kieli</p>
+	    </div>
+		<header class="w3-container w3-center w3-padding-32 w3-white"> 
+		  <h1 class="w3-xxxlarge"><b>LIIKUNTATUNNIT</b></h1>
+		  <p>Täältä voin tarkastella tunteja, joilla mahdollisesti haluaisin käydä </p>
+		  <span class="w3-tag">xxx</span>
+		</header>
+		<div class="w3-bar w3-black row" style="margin-left:0">
+			<a href="/listaasuoritukset" class="w3-bar-item w3-button">Suoritukset</a>
+			<a href="/listaapaikat" class="w3-bar-item w3-button">Paikat</a>
+			<a href="/lisaasuoritus" class="w3-bar-item w3-button">Lisää suoritus</a>
+			<a href="/lisaapaikka" class="w3-bar-item w3-button">Lisää paikka</a>
+			<a href="/listaapaivat" class="w3-bar-item w3-button">Päivät</a>
+        </div>
+        <div class="w3-container" style="background-color:white; padding-top:20px">
+			<form>
+				<table class="table table-striped">
+					<tr>
+						<th>Laji</th>
+						<th>Viikonpäivä</th>
+						<th>Alkamisaika</th>
+						<th>Loppumisaika</th>
+						<th>Paikka</th>
+						<th>Tarjoja</th>
+						<th></th>
+						<th></th>
+					</tr>
+					<tr th:each = "suoritus : ${suoritukset}">
+						<td th:text = "${suoritus.laji}">laji</td>
+						<td th:text = "${suoritus.viikonpaiva.nimi}">paiva</td>
+						<td th:text = "${suoritus.alkamisaika}">alkamis</td>
+						<td th:text = "${suoritus.loppumisaika}">loppumis</td>
+						<td th:text = "${suoritus.paikka.nimi}">paikka</td>
+						<td th:text = "${suoritus.tarjoaja.nimi}">tarjoaja</td>
+						<td><a class="btn btn-warning" th:href="@{/paivitasuoritus/{id}(id=${suoritus.id})}">Muokkaa</a></td>
+						<td><a class="btn btn-danger" th:href="@{/poistasuoritus/{id}(id=${suoritus.id})}">Poista</a></td>    
+		 				<!-- @{} url expression, /deletebook/{id} polku urlissa -->
+		 				
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Lisää paikka</title>
+	<style>
+		input {
+		  display: block;
+		  padding: 10px 20px;
+		}
+		form {
+		  max-width:800px;
+		}
+		.center {
+		    margin: auto;
+		    width: 60%;
+		    padding: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container center">
+		<form action="#" th:action="@{../tallennapaikka}" th:object="${paikka}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-black w3-margin">
+		  	<h1>Lisää uusi liikuntapaikka</h1>
+		  	<br />
+		  	<label for="nimi">Liikuntapaikan nimi: </label>
+		  	<div class="w3-row w3-section">
+			  <div class="w3-col" style="width:50px"></div>	
+			    <div class="w3-rest">
+			      <input class="w3-input w3-border" id="nimi" th:field="${paikka.nimi}" type="text">
+			    </div>
+			</div>
+		    
+		    <div style="padding-top:20px" class="w3-center">
+				<input class="btn btn-success" type="submit" value="Tallenna"/>
+				<a class="btn btn-basic w3-section" href="/listaapaikat">Peruuta</a>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
