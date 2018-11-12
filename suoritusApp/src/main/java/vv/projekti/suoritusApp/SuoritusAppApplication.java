@@ -1,11 +1,18 @@
 package vv.projekti.suoritusApp;
 
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import vv.projekti.suoritusApp.model.Paikka;
 import vv.projekti.suoritusApp.model.PaikkaRepository;
@@ -19,7 +26,7 @@ import vv.projekti.suoritusApp.model.Viikonpaiva;
 import vv.projekti.suoritusApp.model.ViikonpaivaRepository;
 
 @SpringBootApplication
-public class SuoritusAppApplication {
+public class SuoritusAppApplication extends WebMvcConfigurerAdapter{
 
 	private static final Logger log = LoggerFactory.getLogger(SuoritusAppApplication.class);
 	
@@ -27,6 +34,28 @@ public class SuoritusAppApplication {
 		SpringApplication.run(SuoritusAppApplication.class, args);
 	}
 	
+	//KIELEN VAIHTO
+	@Bean
+	public LocaleResolver localeResolver(){
+	       SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+	       localeResolver.setDefaultLocale(Locale.ENGLISH);
+	       return  localeResolver;
+	   }
+	
+	@Bean
+	public LocaleChangeInterceptor localeChangeInterceptor() {
+	    LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+	    localeChangeInterceptor.setParamName("lang");
+	    return localeChangeInterceptor;
+	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry){
+	    registry.addInterceptor(localeChangeInterceptor());
+	}
+	
+	
+	//TESTIDATAA
 	@Bean
 	public CommandLineRunner suoritusDemo(SuoritusRepository suoritusRepository,ViikonpaivaRepository paivaRepository, PaikkaRepository paikkaRepository, TarjoajaRepository tarjoajaRepository, UserRepository userRepository) {
 		return (args) -> {
