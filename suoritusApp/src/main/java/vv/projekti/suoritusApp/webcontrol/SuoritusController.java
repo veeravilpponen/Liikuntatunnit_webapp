@@ -3,9 +3,12 @@ package vv.projekti.suoritusApp.webcontrol;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -95,9 +98,30 @@ public class SuoritusController {
 	
 	// tallettaa suorituksen
     @PostMapping("/tallennasuoritus")
-    public String tallennaSuoritus(Suoritus suoritus){
-        suoritusRepository.save(suoritus);
-        return "redirect:listaasuoritukset";
+    public String tallennaSuoritus(@Valid Suoritus suoritus, BindingResult bindingResult, Model model){
+    	model.addAttribute("paivat", paivaRepository.findAll());
+    	model.addAttribute("paikat", paikkaRepository.findAll());
+    	model.addAttribute("tarjoajat", tarjoajaRepository.findAll());
+    	
+    	if (bindingResult.hasErrors()) {
+         	return "lisaasuoritus";
+         	
+         } else {
+	        suoritusRepository.save(suoritus);
+	        return "redirect:listaasuoritukset";
+        }
+    }
+    
+    // tallettaa PÄIVITETYN suorituksen
+    @PostMapping("/tallennasuoritus-paivitetty")
+    public String tallennaPaivSuoritus(@Valid Suoritus paivsuoritus, BindingResult bindingResult, Model model){
+    	if (bindingResult.hasErrors()) {
+         	return "paivitasuoritus";
+         	
+        } else {
+	        suoritusRepository.save(paivsuoritus);
+	        return "redirect:listaasuoritukset";
+        }
     }
     
     // päivitetään suorituksen tiedot

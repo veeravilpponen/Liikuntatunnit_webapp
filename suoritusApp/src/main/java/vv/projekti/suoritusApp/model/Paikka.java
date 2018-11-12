@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Paikka {
@@ -15,6 +16,8 @@ public class Paikka {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long paikkaId;
+	
+	@NotEmpty
 	private String nimi;	//liikuntapaikan nimi
 	
 	// Paikka(1) - Suoritus(*)

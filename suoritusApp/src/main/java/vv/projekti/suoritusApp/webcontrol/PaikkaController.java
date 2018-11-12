@@ -36,7 +36,6 @@ public class PaikkaController {
      @RequestMapping(value="/paikat", method = RequestMethod.GET)
      // @ResponseBody kertoo, että pitää palauttaa json-dataa
      public @ResponseBody List<Paikka> listaaPaikatRest() {		
-     	// palauttaa repositorysta haetut suoritukset, muuntuu automaattisesti json:ksi
          return (List<Paikka>) paikkaRepository.findAll();
      }    
 

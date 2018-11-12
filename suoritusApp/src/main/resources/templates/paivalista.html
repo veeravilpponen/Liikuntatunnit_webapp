@@ -13,9 +13,9 @@
 </head>
 <body>
 	<div class="container" style="width:80%">
-		<div class="w3-bar w3-black row" style="margin-left:0;">
+		<div class="w3-bar w3-black row" style="margin-left:0">
 		  	<p th:inline="text" style="font-size:16px" sec:authorize="hasAuthority('USER')">[[${#httpServletRequest.remoteUser}]] kirjautuneena!</p>
-		  	<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('USER')">
+		  	<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('USER')" >
 	            <input type="submit" value="Kirjaudu ulos" class="btn" />
 	        </form> 
 	        <p>kieli</p>
@@ -27,22 +27,16 @@
 		</header>
 	
 		<div class="w3-bar w3-black row" style="margin-left:0">
-			<a href="/listaapaivat" class="w3-bar-item w3-button">Tunnit</a>
+			<a href="/listaapaivat" class="w3-bar-item w3-button">Tunnit päivittäin</a>
 			<a href="/listaapaikat" class="w3-bar-item w3-button">Paikat</a>
 			<a href="/lisaasuoritus" class="w3-bar-item w3-button">Lisää tunti</a>
 			<a href="/lisaapaikka" class="w3-bar-item w3-button">Lisää paikka</a>
+			<a href="/listaasuoritukset" class="w3-bar-item w3-button">Kaikki tunnit</a>
         </div>
         <div class="container" style="background-color:white; padding-top:20px; padding-bottom:5px;">
-			<form>
-				<table class="table table-striped" >
-					<tr>
-						<th>Valitse päivä, jonka tunnit haluat nähdä</th>
-					</tr>
-					<tr th:each = "paiva : ${paivat}" >
-						<td><a class="btn btn-success" th:href="@{/listaatunnit/{id}(id=${paiva.viikonpaivaId})}" th:text="${paiva.nimi}"></a></td>		
-					</tr>
-				</table>
-			</form>
+			<span th:each = "paiva : ${paivat}">
+				<a class="btn btn-success" th:href="@{/listaatunnit/{id}(id=${paiva.viikonpaivaId})}" th:text="${paiva.nimi}"></a>
+			</span>
 		</div>
 	</div>
 </body>

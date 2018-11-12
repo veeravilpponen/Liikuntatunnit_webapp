@@ -6,6 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,20 +21,32 @@ public class Suoritus {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	//@Size(min=5, max=30)
+	@NotEmpty
 	private String laji;	// urheilulaji
+	
+	@Min(10)
+	@Max(1000)
 	private int kulutus; 	// energiankulutus kcal
-	private double alkamisaika;
-	private double loppumisaika;
-	//private String omistaja;
+	
+	//@Size(min=2, max=4)
+	@NotEmpty
+	private String alkamisaika;
+	
+	//@Size(min=2, max=4)
+	@NotEmpty
+	private String loppumisaika;
 	
 	@ManyToOne  	// Suoritus(*) - Viikonpäivä(1)
     @JsonIgnore 	
     @JoinColumn(name = "viikonpaivaId")
 	private Viikonpaiva viikonpaiva;
+	
 	@ManyToOne  	// Suoritus(*) - Paikka(1)
     @JsonIgnore 	// kun muunnetaan olio json-muotoon, niin jätä pois paikkaid, ettei synny ikuista luuppia
     @JoinColumn(name = "paikkaId")
 	private Paikka paikka;
+	
 	@ManyToOne  	// Suoritus(*) - Tarjoaja(1)
     @JsonIgnore
     @JoinColumn(name = "tarjoajaId")
@@ -41,22 +58,20 @@ public class Suoritus {
 		super();
 		this.laji = null;
 		this.kulutus = 0;
-		this.alkamisaika = 0;
-		this.loppumisaika = 0;
-		//this.omistaja = null;
+		this.alkamisaika = null;
+		this.loppumisaika = null;
 		this.viikonpaiva = null;
 		this.paikka = null;
 		this.tarjoaja = null;
 		
 	}
 	
-	public Suoritus(String laji, int kulutus, double alkamisaika, double loppumisaika, Viikonpaiva viikonpaiva, Paikka paikka, Tarjoaja tarjoaja) {
+	public Suoritus(String laji, int kulutus, String alkamisaika, String loppumisaika, Viikonpaiva viikonpaiva, Paikka paikka, Tarjoaja tarjoaja) {
 		super();
 		this.laji = laji;
 		this.kulutus = kulutus;
 		this.alkamisaika = alkamisaika;
 		this.loppumisaika = loppumisaika;
-		//this.omistaja = user.getUsername();
 		this.viikonpaiva = viikonpaiva;
 		this.paikka = paikka;
 		this.tarjoaja = tarjoaja;
@@ -85,18 +100,19 @@ public class Suoritus {
 	public void setKulutus(int kulutus) {
 		this.kulutus = kulutus;
 	}
-	public double getAlkamisaika() {
+	public String getAlkamisaika() {
 		return alkamisaika;
 	}
-	public void setAlkamisaika(double alkamisaika) {
+	public void setAlkamisaika(String alkamisaika) {
 		this.alkamisaika = alkamisaika;
 	}
-	public double getLoppumisaika() {
+	public String getLoppumisaika() {
 		return loppumisaika;
 	}
-	public void setLoppumisaika(double loppumisaika) {
+	public void setLoppumisaika(String loppumisaika) {
 		this.loppumisaika = loppumisaika;
 	}
+
 	public Viikonpaiva getViikonpaiva() {
 		return viikonpaiva;
 	}
@@ -115,18 +131,11 @@ public class Suoritus {
 	public void setTarjoaja(Tarjoaja tarjoaja) {
 		this.tarjoaja = tarjoaja;
 	}
-	/*
-	public String getOmistaja() {
-		return omistaja;
-	}
-	public void setOmistaja(String omistaja) {
-		this.omistaja = omistaja;
-	}
-	*/
+
 
 	@Override
 	public String toString() {
-		if (this.paikka != null && this.tarjoaja != null)
+		if (this.paikka != null && this.tarjoaja != null && this.viikonpaiva != null)
 			return "Suoritus [id=" + id + ", laji=" + laji + ", kulutus=" + kulutus + ", alkamisaika=" + alkamisaika
 					+ ", loppumisaika=" + loppumisaika + ", viikonpaiva=" + this.getViikonpaiva() + ", paikka=" + this.getPaikka() + ", tarjoaja=" + this.getTarjoaja() + "]";			
 		else
