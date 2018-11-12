@@ -3,6 +3,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Päivitä paikka</title>
 	<style>
 		input {
@@ -20,8 +22,8 @@
 	</style>
 </head>
 <body>
-	<div class="container">
-		<form action="#" th:action="@{../tallennapaikka}" th:object="${paivpaikka}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin">
+	<div class="container center">
+		<form action="#" th:action="@{../tallennapaikka}" th:object="${paivpaikka}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-black w3-margin">
 		  	<h1>Päivitä liikuntapaikan nimi</h1>
 		  	<br />
 		  	<input type="hidden" th:field="${paivpaikka.paikkaId}" class="form-control"/>

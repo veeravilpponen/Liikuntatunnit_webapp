@@ -25,10 +25,10 @@
 <body>
 	<div class="container center">
 		<form action="#" th:action="@{../tallennasuoritus}" th:object="${suoritus}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-black w3-margin">
-			<h1>Lisää uusi tunti</h1>
+			<h1 th:text="#{lisaatunti.otsikko}">Lisää uusi tunti</h1>
 			<br />
 		  	
-		  	<label for="laji">Laji: </label>
+		  	<label for="laji" th:text="#{laji}">Laji: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -37,7 +37,7 @@
 			    </div>
 			</div>
 			
-			<label for="viikonpaivalista">Viikonpäivä: </label>
+			<label for="viikonpaivalista" th:text="#{paiva}">Viikonpäivä: </label>
 			<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -49,7 +49,7 @@
 			
 		  	<div style="clear: both; display: block; height: 10px;"></div>
 		  	
-		  	<label for="kulutus">Kulutus: </label>
+		  	<label for="kulutus" th:text="#{kulutus}">Kulutus: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -58,7 +58,7 @@
 			    </div>
 			</div>
 			
-			<label for="alkamisaika">Alkamisaika: </label>
+			<label for="alkamisaika" th:text="#{alku}">Alkamisaika: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -67,7 +67,7 @@
 			    </div>
 			</div>
 			
-			<label for="loppumisaika">Loppumisaika: </label>
+			<label for="loppumisaika" th:text="#{loppu}">Loppumisaika: </label>
 			<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -76,7 +76,7 @@
 			    </div>
 			</div>	
 							
-		  	<label for="paikkalista">Paikka: </label>
+		  	<label for="paikkalista" th:text="#{paikka}">Paikka: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -86,7 +86,7 @@
 			    </div>
 			</div>
 								
-		  	<label for="tarjoajalista">Tarjoaja: </label>
+		  	<label for="tarjoajalista" th:text="#{tarjoaja}">Tarjoaja: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -97,8 +97,8 @@
 			</div>
 			
 		    <div style="padding:20px 0 20px 0">
-				<input class="btn btn-success" type="submit" value="Tallenna"/>
-				<a class="btn btn-basic" href="/listaasuoritukset">Peruuta</a>
+				<input class="btn btn-success" type="submit" value="Tallenna" th:value="#{tallenna}"/>
+				<a class="btn btn-basic" href="/listaapaivat" th:text="#{takaisin}">Peruuta</a>
 			</div>
 		</form>
 	</div>

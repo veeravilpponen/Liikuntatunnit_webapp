@@ -27,7 +27,7 @@
 		<div class="w3-bar w3-black row" style="margin-left:0">
 		  	<p th:inline="text" style="font-size:16px" sec:authorize="hasAuthority('USER')" >[[${#httpServletRequest.remoteUser}]] <span  th:text="#{kirj.user}">kirjautuneena!</span></p>
 		  	<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('USER')" >
-	            <input type="submit" value="Kirjaudu ulos" class="btn" th:text="#{kirj.ulos}"/>
+	            <input type="submit" value="Kirjaudu ulos" class="btn" th:value="#{kirj.ulos}"/>
 	        </form> 
 	        <div>
 		        <span th:text="#{lang.change}"></span>:

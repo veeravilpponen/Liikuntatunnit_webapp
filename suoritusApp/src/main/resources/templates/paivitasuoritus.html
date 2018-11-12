@@ -3,24 +3,32 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Päivitä tunti</title>
 	<style>
 		input {
 		  display: block;
 		  padding: 10px 20px;
 		}
-		select {
-		  max-width:150px;
+		form {
+		  max-width:800px;
+		  
+		}
+		.center {
+		    margin: auto;
+		    width: 60%;
+		    padding: 10px;
 		}
 	</style>
 </head>
 <body>
-	<div class="container">
-		<h1>Päivitä tunnin tiedot</h1>
-		<form action="#" th:action="@{../tallennasuoritus-paivitetty}" th:object="${paivsuoritus}" method="post">
+	<div class="container center">
+		<form action="#" th:action="@{../tallennasuoritus-paivitetty}" th:object="${paivsuoritus}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-black w3-margin">
+			<h1 th:text="#{paivtunti.otsikko}">Päivitä tunnin tiedot</h1>
 			<input type="hidden" th:field="${paivsuoritus.id}" class="form-control"/>
 			
-			<label for="laji">Laji: </label>
+			<label for="laji" th:text="#{laji}">Laji: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -29,7 +37,7 @@
 			    </div>
 			</div>
 			
-			<label for="viikonpaivalista">Viikonpäivä: </label>
+			<label for="viikonpaivalista" th:text="#{paiva}">Viikonpäivä: </label>
 			<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -38,10 +46,8 @@
 				  </select>
 			    </div>
 			</div>
-			
-			<div style="clear: both; display: block; height: 10px;"></div>
-		  	
-		  	<label for="kulutus">Kulutus: </label>
+		
+		  	<label for="kulutus" th:text="#{kulutus}">Kulutus: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -49,10 +55,8 @@
 			      <div th:if="${#fields.hasErrors('kulutus')}" th:errors="${paivsuoritus.kulutus}">Täytyy olla numero, välillä 10-1000</div>
 			    </div>
 			</div>
-		  	
-		  	
-			
-			<label for="alkamisaika">Alkamisaika: </label>
+		  
+			<label for="alkamisaika" th:text="#{alku}">Alkamisaika: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -61,7 +65,7 @@
 			    </div>
 			</div>
 			
-			<label for="loppumisaika">Loppumisaika: </label>
+			<label for="loppumisaika" th:text="#{loppu}">Loppumisaika: </label>
 			<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -69,11 +73,8 @@
 			      <div th:if="${#fields.hasErrors('loppumisaika')}" th:errors="${paivsuoritus.loppumisaika}">Ei saa jättää tyhjäksi</div>
 			    </div>
 			</div>	
-			
-			<div style="clear: both; display: block; height: 10px;"></div>		
-							
-							
-		  	<label for="paikkalista">Paikka: </label>
+						
+		  	<label for="paikkalista" th:text="#{paikka}">Paikka: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -82,10 +83,8 @@
 				  </select>
 			    </div>
 			</div>
-		
-		    <div style="clear: both; display: block; height: 10px;"></div>	
-					
-		  	<label for="tarjoajalista">Tarjoaja: </label>
+				
+		  	<label for="tarjoajalista" th:text="#{tarjoaja}">Tarjoaja: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -95,9 +94,9 @@
 			    </div>
 			</div>				
 			
-		    <div style="padding-top:20px">
-				<input class="btn btn-success" type="submit" value="Tallenna"/>
-				<a class="btn btn-basic" href="/listaasuoritukset">Peruuta</a>
+		    <div style="padding:20px 0 20px 0">
+				<input class="btn btn-success" type="submit" value="Tallenna" th:value="#{tallenna}"/>
+				<a class="btn btn-basic" href="/listaapaivat">Peruuta</a>
 			</div>
 		</form>
 	</div>

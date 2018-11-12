@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
-        <title>Kirjaudu, jotta voit muokata</title>
+        <title >Kirjaudu</title>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
@@ -15,43 +15,63 @@
 			}
 			
 		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	    <script type="text/javascript">
+	        $(document).ready(function() {
+	            $("#locales").change(function () {
+	                var selectedOption = $('#locales').val();
+	                if (selectedOption !== ''){
+	                    window.location.replace('login?lang=' + selectedOption);
+	                }
+	            });
+	        });
+	    </script>
     </head>
     <body>
     	<div class="container center" style="width:80%">
-    		<div class="w3-bar w3-black row" style="margin-left:0; align-content:left">
-			  	<p th:inline="text" style="font-size:16px" sec:authorize="hasAuthority('USER')">[[${#httpServletRequest.remoteUser}]] kirjautuneena!</p>
-			  	<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('USER')">
-		            <input type="submit" value="Kirjaudu ulos" class="btn" />
-		        </form> 
-		        <p>kieli</p>
-		    </div>
-			<header class="w3-container w3-center w3-padding-32 w3-white"> 
-			  <h1 class="w3-xxxlarge"><b>LIIKUNTATUNNIT</b></h1>
-			  <p>Täältä voin tarkastella tunteja, joilla mahdollisesti haluaisin käydä </p>
-			  <span class="w3-tag">xxx</span>
-			</header>
-			<div class="w3-bar w3-black row" style="margin-left:0">
-				<a href="/listaasuoritukset" class="w3-bar-item w3-button">Suoritukset</a>
-				<a href="/listaapaikat" class="w3-bar-item w3-button">Paikat</a>
-				<a href="/lisaasuoritus" class="w3-bar-item w3-button">Lisää suoritus</a>
-				<a href="/lisaapaikka" class="w3-bar-item w3-button">Lisää paikka</a>
-	        </div>
+    		<div class="w3-bar w3-black row" style="margin-left:0; height:40px">
+		  	<p th:inline="text" style="font-size:16px" sec:authorize="hasAuthority('USER')" >[[${#httpServletRequest.remoteUser}]] <span  th:text="#{kirj.user}">kirjautuneena!</span></p>
+		  	<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('USER')">
+	            <input type="submit" value="Kirjaudu ulos" class="btn" th:value="#{kirj.ulos}" />
+	        </form> 
+	        <div>
+		        <span th:text="#{lang.change}"></span>:
+				<select id="locales">
+				    <option value=""></option>
+				    <option value="en" th:text="#{lang.en}"></option>
+				    <option value="fi" th:text="#{lang.fi}"></option>
+				</select>
+			</div>
+	    </div>
+		<header class="w3-container w3-center w3-padding-32 w3-white"> 
+		  <h1 class="w3-xxxlarge" th:text="#{otsikko}"><b>LIIKUNTATUNNIT</b></h1>
+		  <p th:text="#{subotsikko}">Täältä voin tarkastella tunteja, joilla mahdollisesti haluaisin käydä </p>
+		  <span class="w3-tag">xxx</span>
+		</header>
+	
+		<div class="w3-bar w3-black row" style="margin-left:0">
+			<a href="/listaapaivat" class="w3-bar-item w3-button" th:text="#{listaapaivat}">Tunnit päivittäin</a>
+			<a href="/listaapaikat" class="w3-bar-item w3-button" th:text="#{listaapaikat}">Paikat</a>
+			<a href="/lisaasuoritus" class="w3-bar-item w3-button" th:text="#{lisaatunti}">Lisää tunti</a>
+			<a href="/lisaapaikka" class="w3-bar-item w3-button" th:text="#{lisaapaikka}">Lisää paikka</a>
+			<a href="/listaasuoritukset" class="w3-bar-item w3-button" th:text="#{kaikkitunnit}">Kaikki tunnit</a>
+        </div>
 	        <div class="w3-container" style="background-color:white">
-		        <div th:if="${param.error}" class="w3-container w3-card-4 w3-light-grey w3-text-red w3-margin" style="padding:10px">
-		            Väärä käyttäjätunnus ja salasana. Yritä uudestaan.
+		        <div th:if="${param.error}" class="w3-container w3-card-4 w3-light-grey w3-text-red w3-margin" style="padding:10px" th:text="#{kirj.error}">
+		            Väärä käyttäjätunnus ja/tai salasana. Yritä uudestaan.
 		        </div>
-		        <div th:if="${param.logout}" class="w3-container w3-card-4 w3-light-grey w3-text-red w3-margin" style="padding:10px">
+		        <div th:if="${param.logout}" class="w3-container w3-card-4 w3-light-grey w3-text-red w3-margin" style="padding:10px" th:text="#{kirj.success}">
 		            Olet kirjautunut ulos.
 		        </div>
 		      
 		        <form th:action="@{/login}" method="post" class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin">
 			        <div class="w3-section w3-row">
-			        	<h2>Syötä tiedot kirjautumista varten</h2>
+			        	<h2 th:text="#{kirj.otsikko}">Syötä tiedot kirjautumista varten</h2>
 			        	<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
-			            <div class="w3-rest"><input type="text" name="username" class="w3-input w3-border w3-margin-bottom" placeholder="Kirjoita käyttäjänimesi"/></div>
+			            <div class="w3-rest"><input type="text" name="username" class="w3-input w3-border w3-margin-bottom" placeholder="Kirjoita käyttäjänimesi" th:placeholder="#{form.user}"/></div>
 			            <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-key"></i></div>
-			            <div class="w3-rest"><input type="password" name="password" class="w3-input w3-border" placeholder="Kirjoita salasanasi"/></div>
-			            <div><input type="submit" value="Kirjaudu sisään" class="w3-button w3-block w3-green w3-section w3-padding"/></div>
+			            <div class="w3-rest"><input type="password" name="password" class="w3-input w3-border" placeholder="Kirjoita salasanasi" th:placeholder="#{form.password}"/></div>
+			            <div><input type="submit" value="Kirjaudu sisään" th:value="#{button.kirjaudu}" class="w3-button w3-block w3-green w3-section w3-padding"/></div>
 		            </div>
 		        </form>
 	        </div>
