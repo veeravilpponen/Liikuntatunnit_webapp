@@ -24,9 +24,9 @@
 <body>
 	<div class="container center">
 		<form action="#" th:action="@{../tallennapaikka}" th:object="${paikka}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-black w3-margin">
-		  	<h1>Lisää uusi liikuntapaikka</h1>
+		  	<h1 th:text="#{lisaapaikka.otsikko}">Lisää uusi liikuntapaikka</h1>
 		  	<br />
-		  	<label for="nimi">Liikuntapaikan nimi: </label>
+		  	<label for="nimi" th:text="#{paikannimi}">Liikuntapaikan nimi: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
@@ -35,8 +35,8 @@
 			</div>
 		    
 		    <div style="padding-top:20px" class="w3-center">
-				<input class="btn btn-success" type="submit" value="Tallenna"/>
-				<a class="btn btn-basic w3-section" href="/listaapaikat">Peruuta</a>
+				<input class="btn btn-success" type="submit" value="Tallenna" th:value="#{tallenna}"/>
+				<a class="btn btn-basic w3-section" href="/listaapaikat" th:text="#{takaisin}">Peruuta</a>
 			</div>
 		</form>
 	</div>
