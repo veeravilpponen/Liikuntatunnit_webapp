@@ -24,6 +24,11 @@
 		    width: 60%;
 		    padding: 10px;
 		}
+		.buttonstyle {
+		    background-color: white;
+		    color: black;
+		    border: 1px solid grey;
+		}
 	</style>
 </head>
 <body>
@@ -43,7 +48,7 @@
 		    
 		    <div style="padding-top:20px" class="w3-center">
 				<input class="btn btn-success" type="submit" value="Tallenna" th:value="#{tallenna}"/>
-				<a class="btn btn-basic w3-section" href="/listaapaikat" th:text="#{takaisin}">Peruuta</a>
+				<a class="btn buttonstyle w3-section" href="/listaapaikat" th:text="#{takaisin}">Peruuta</a>
 			</div>
 		</form>
 

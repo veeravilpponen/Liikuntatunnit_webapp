@@ -11,20 +11,27 @@
 		                no-repeat center center fixed;
 		    background-size: cover;
 		}
+		.buttonstyle {
+		    background-color: white;
+		    color: black;
+		    border: 1px solid grey;
+		}
 	</style>
 
 </head>
 <body>
 	<div class="container center" style="width:80%">
-		<div class="w3-bar w3-black row" style="margin-left:0; align-content:left">
-		  	<p th:inline="text" style="font-size:16px" sec:authorize="hasAuthority('USER')" >[[${#httpServletRequest.remoteUser}]] <span  th:text="#{kirj.user}">kirjautuneena!</span></p>
-		  	<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('USER')">
-	            <input type="submit" value="Kirjaudu ulos" class="btn" th:value="#{kirj.ulos}"/>
-	        </form>
-	        <p th:inline="text" style="font-size:16px" sec:authorize="hasAuthority('ADMIN')" >[[${#httpServletRequest.remoteUser}]] <span  th:text="#{kirj.user}">kirjautuneena!</span></p>
-		  	<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('ADMIN')">
-	            <input type="submit" value="Kirjaudu ulos" class="btn" th:value="#{kirj.ulos}" />
-	        </form> 
+		<div class="w3-bar w3-black row" style="margin-left:0">
+			<div class="col-7">
+			</div>
+			<div class="col-3">
+		  		<p th:inline="text" style="font-size:16px" >[[${#httpServletRequest.remoteUser}]] <span  th:text="#{kirj.user}">kirjautuneena!</span></p>
+		  	</div>
+		  	<div class="col-2">
+			  	<form th:action="@{/logout}" method="post"  >
+		            <input type="submit" value="Kirjaudu ulos" class="btn" th:value="#{kirj.ulos}"/>
+		        </form>
+	        </div>       
 	    </div>
 		<header class="w3-container w3-center w3-padding-32 w3-white"> 
 		  <h1 class="w3-xxxlarge" th:text="#{otsikko}"><b>LIIKUNTATUNNIT</b></h1>
@@ -57,13 +64,15 @@
 						<td th:text = "${suoritus.loppumisaika}">loppumis</td>
 						<td th:text = "${suoritus.paikka.nimi}">paikka</td>
 						<td th:text = "${suoritus.tarjoaja.nimi}">tarjoaja</td>
-						<td><a class="btn btn-warning" th:href="@{/paivitasuoritus/{id}(id=${suoritus.id})}" th:text="#{muokkaa}">Muokkaa</a></td>
-						<td><a class="btn btn-danger" th:href="@{/poistasuoritus/{id}(id=${suoritus.id})}" th:text="#{poista}">Poista</a></td>    
+						<td><a class="btn btn-warning" th:href="@{/paivitasuoritus/{id}(id=${suoritus.id})}" sec:authorize="hasAuthority('ADMIN')" th:text="#{muokkaa}">Muokkaa</a></td>
+						<td><a class="btn btn-danger" th:href="@{/poistasuoritus/{id}(id=${suoritus.id})}" sec:authorize="hasAuthority('ADMIN')" th:text="#{poista}">Poista</a></td>    
 		 				
 					</tr>
 				</table>
 			</form>
-			
+			<div style="padding:20px 0 20px 0">
+				<a class="btn buttonstyle" href="/listaapaivat" th:text="#{edellinen}">Takaisin</a>
+			</div>
 		</div>
 	</div>
 </body>

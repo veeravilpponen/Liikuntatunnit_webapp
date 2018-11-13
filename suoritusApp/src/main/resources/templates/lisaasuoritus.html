@@ -25,6 +25,11 @@
 		    width: 60%;
 		    padding: 10px;
 		}
+		.buttonstyle {
+		    background-color: white;
+		    color: black;
+		    border: 1px solid grey;
+		}
 	</style>
 </head>
 <body>
@@ -103,7 +108,7 @@
 			
 		    <div style="padding:20px 0 20px 0">
 				<input class="btn btn-success" type="submit" value="Tallenna" th:value="#{tallenna}"/>
-				<a class="btn btn-basic" href="/listaapaivat" th:text="#{takaisin}">Peruuta</a>
+				<a class="btn buttonstyle" href="/listaapaivat" th:text="#{takaisin}">Peruuta</a>
 			</div>
 		</form>
 	</div>
