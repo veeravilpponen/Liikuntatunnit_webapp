@@ -3,6 +3,7 @@ package vv.projekti.suoritusApp.webcontrol;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import vv.projekti.suoritusApp.model.PaikkaRepository;
 import vv.projekti.suoritusApp.model.Suoritus;
@@ -96,30 +98,22 @@ public class SuoritusController {
         return "lisaasuoritus";
     }
 	
-	// tallettaa suorituksen
+	// tallettaa suorituksen, uuden tai päivitetyn
     @PostMapping("/tallennasuoritus")
-    public String tallennaSuoritus(@Valid Suoritus suoritus, BindingResult bindingResult, Model model){
+    public String tallennaSuoritus(@Valid Suoritus suoritus, BindingResult bindingResult, Model model, HttpServletRequest request){
     	model.addAttribute("paivat", paivaRepository.findAll());
     	model.addAttribute("paikat", paikkaRepository.findAll());
     	model.addAttribute("tarjoajat", tarjoajaRepository.findAll());
     	
+    	String url = request.getHeader("referer");
+    	System.out.println(url);
+    	
     	if (bindingResult.hasErrors()) {
-         	return "lisaasuoritus";
+         	//return "lisaasuoritus";
+    		return (url.contains("lisaa") ? "lisaasuoritus" :  "paivitasuoritus");
          	
          } else {
 	        suoritusRepository.save(suoritus);
-	        return "redirect:listaasuoritukset";
-        }
-    }
-    
-    // tallettaa PÄIVITETYN suorituksen
-    @PostMapping("/tallennasuoritus-paivitetty")
-    public String tallennaPaivSuoritus(@Valid Suoritus paivsuoritus, BindingResult bindingResult, Model model){
-    	if (bindingResult.hasErrors()) {
-         	return "paivitasuoritus";
-         	
-        } else {
-	        suoritusRepository.save(paivsuoritus);
 	        return "redirect:listaasuoritukset";
         }
     }
@@ -128,7 +122,7 @@ public class SuoritusController {
   	@RequestMapping(value="/paivitasuoritus/{id}")
   	public String muokkaaSuoritusta(@PathVariable("id") Long suoritusId, Model model) {
   		//haetaan valitun suorituksen tiedot id:n perusteella
-  		model.addAttribute("paivsuoritus", suoritusRepository.findById(suoritusId));
+  		model.addAttribute("suoritus", suoritusRepository.findById(suoritusId));
   		model.addAttribute("paikat", paikkaRepository.findAll());
   		model.addAttribute("tarjoajat", tarjoajaRepository.findAll());
   		model.addAttribute("paivat", paivaRepository.findAll());

@@ -34,16 +34,16 @@
 </head>
 <body>
 	<div class="container center">
-		<form action="#" th:action="@{../tallennasuoritus-paivitetty}" th:object="${paivsuoritus}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-black w3-margin">
+		<form action="#" th:action="@{../tallennasuoritus}" th:object="${suoritus}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-black w3-margin">
 			<h1 th:text="#{paivtunti.otsikko}">Päivitä tunnin tiedot</h1>
-			<input type="hidden" th:field="${paivsuoritus.id}" class="form-control"/>
+			<input type="hidden" th:field="${suoritus.id}" class="form-control"/>
 			
 			<label for="laji" th:text="#{laji}">Laji: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
-			      <input class="w3-input w3-border" id="laji" th:field="${paivsuoritus.laji}" type="text">
-			      <div th:if="${#fields.hasErrors('laji')}" th:errors="${paivsuoritus.laji}">Ei saa jättää tyhjäksi</div>
+			      <input class="w3-input w3-border" id="laji" th:field="${suoritus.laji}" type="text">
+			      <div th:if="${#fields.hasErrors('laji')}" th:errors="${suoritus.laji}">Ei saa jättää tyhjäksi</div>
 			    </div>
 			</div>
 			
@@ -51,7 +51,7 @@
 			<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
-			      <select th:field="${paivsuoritus.viikonpaiva}" class="form-control w3-input w3-border">
+			      <select th:field="${suoritus.viikonpaiva}" class="form-control w3-input w3-border">
 				  	<option th:each="viikonpaiva: ${paivat}" th:value="${viikonpaiva.viikonpaivaId}" th:text="${viikonpaiva.nimi}"></option>
 				  </select>
 			    </div>
@@ -61,8 +61,8 @@
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
-			      <input class="w3-input w3-border" id="kulutus" th:field="${paivsuoritus.kulutus}" type="number">
-			      <div th:if="${#fields.hasErrors('kulutus')}" th:errors="${paivsuoritus.kulutus}">Täytyy olla numero, välillä 10-1000</div>
+			      <input class="w3-input w3-border" id="kulutus" th:field="${suoritus.kulutus}" type="number">
+			      <div th:if="${#fields.hasErrors('kulutus')}" th:errors="${suoritus.kulutus}">Täytyy olla numero, välillä 10-1000</div>
 			    </div>
 			</div>
 		  
@@ -70,8 +70,8 @@
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
-			      <input class="w3-input w3-border" id="alkamisaika" th:field="${paivsuoritus.alkamisaika}" type="text" >
-			      <div th:if="${#fields.hasErrors('alkamisaika')}" th:errors="${paivsuoritus.alkamisaika}">Ei saa jättää tyhjäksi</div>
+			      <input class="w3-input w3-border" id="alkamisaika" th:field="${suoritus.alkamisaika}" type="text" >
+			      <div th:if="${#fields.hasErrors('alkamisaika')}" th:errors="${suoritus.alkamisaika}">Ei saa jättää tyhjäksi</div>
 			    </div>
 			</div>
 			
@@ -79,8 +79,8 @@
 			<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
-			      <input class="w3-input w3-border" id="loppumisaika" th:field="${paivsuoritus.loppumisaika}" type="text">
-			      <div th:if="${#fields.hasErrors('loppumisaika')}" th:errors="${paivsuoritus.loppumisaika}">Ei saa jättää tyhjäksi</div>
+			      <input class="w3-input w3-border" id="loppumisaika" th:field="${suoritus.loppumisaika}" type="text">
+			      <div th:if="${#fields.hasErrors('loppumisaika')}" th:errors="${suoritus.loppumisaika}">Ei saa jättää tyhjäksi</div>
 			    </div>
 			</div>	
 						
@@ -88,7 +88,7 @@
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
-			      <select th:field="${paivsuoritus.paikka}" class="form-control w3-input w3-border">
+			      <select th:field="${suoritus.paikka}" class="form-control w3-input w3-border">
 				     <option th:each="paikka: ${paikat}" th:value="${paikka.paikkaId}" th:text="${paikka.nimi}"></option>
 				  </select>
 			    </div>
@@ -98,7 +98,7 @@
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"></div>	
 			    <div class="w3-rest">
-			      <select th:field="${paivsuoritus.tarjoaja}" class="form-control w3-input w3-border">
+			      <select th:field="${suoritus.tarjoaja}" class="form-control w3-input w3-border">
 				     <option th:each="tarjoaja: ${tarjoajat}" th:value="${tarjoaja.tarjoajaId}" th:text="${tarjoaja.nimi}"></option>
 				  </select>
 			    </div>

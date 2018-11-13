@@ -3,9 +3,13 @@ package vv.projekti.suoritusApp.webcontrol;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import vv.projekti.suoritusApp.model.Paikka;
 import vv.projekti.suoritusApp.model.PaikkaRepository;
+import vv.projekti.suoritusApp.model.Suoritus;
 
 @Controller
 public class PaikkaController {
@@ -53,18 +58,25 @@ public class PaikkaController {
           return "lisaapaikka";
       }
    	
-  	// tallettaa paikan
+  	
+  	// tallettaa paikan, uuden tai päivitetyn
      @PostMapping("/tallennapaikka")
-     public String tallennaPaikka(Paikka paikka){
-         paikkaRepository.save(paikka);
-         return "redirect:listaapaikat";
+     public String tallennaPaikka(@Valid Paikka paikka, BindingResult bindingResult, HttpServletRequest request){
+    	 String url = request.getHeader("referer");
+    	 if (bindingResult.hasErrors()) {
+     		return (url.contains("lisaa") ? "lisaapaikka" :  "paivitapaikka");
+          	
+          } else {
+        	  paikkaRepository.save(paikka);
+              return "redirect:listaapaikat";
+         } 
      }
      
      // päivitetään paikan tiedot
    	@RequestMapping(value="/paivitapaikka/{id}")
    	public String muokkaaPaikkaa(@PathVariable("id") Long paikkaId, Model model) {
    		//haetaan valitun paikan tiedot id:n perusteella
-   		model.addAttribute("paivpaikka", paikkaRepository.findById(paikkaId));
+   		model.addAttribute("paikka", paikkaRepository.findById(paikkaId));
    		return "paivitapaikka";
    	}
    	

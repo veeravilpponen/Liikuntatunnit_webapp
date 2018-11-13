@@ -21,7 +21,6 @@ public class Suoritus {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	//@Size(min=5, max=30)
 	@NotEmpty
 	private String laji;	// urheilulaji
 	
@@ -29,11 +28,9 @@ public class Suoritus {
 	@Max(1000)
 	private int kulutus; 	// energiankulutus kcal
 	
-	//@Size(min=2, max=4)
 	@NotEmpty
 	private String alkamisaika;
-	
-	//@Size(min=2, max=4)
+
 	@NotEmpty
 	private String loppumisaika;
 	

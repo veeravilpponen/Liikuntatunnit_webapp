@@ -33,16 +33,17 @@
 </head>
 <body>
 	<div class="container center">
-		<form action="#" th:action="@{../tallennapaikka}" th:object="${paivpaikka}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-black w3-margin">
+		<form action="#" th:action="@{../tallennapaikka}" th:object="${paikka}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-black w3-margin">
 		  	<h1 th:text="#{paivpaikka.otsikko}">Päivitä liikuntapaikan nimi</h1>
 		  	<br />
-		  	<input type="hidden" th:field="${paivpaikka.paikkaId}" class="form-control"/>
+		  	<input type="hidden" th:field="${paikka.paikkaId}" class="form-control"/>
 		  	
 		  	<label for="nimi" th:text="#{paikannimi}">Liikuntapaikan nimi: </label>
 		  	<div class="w3-row w3-section">
 			  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-home"></i></div>	
 			    <div class="w3-rest">
-			      <input class="w3-input w3-border" id="nimi" th:field="${paivpaikka.nimi}"  type="text">
+			      <input class="w3-input w3-border" id="nimi" th:field="${paikka.nimi}"  type="text">
+			      <div th:if="${#fields.hasErrors('nimi')}" th:errors="${paikka.nimi}">Ei saa jättää tyhjäksi</div>
 			    </div>
 			</div>
 		    
