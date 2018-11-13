@@ -7,6 +7,11 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Päivitä paikka</title>
 	<style>
+		body {
+		    background: url("https://cdn.pixabay.com/photo/2016/02/15/11/43/sport-1201014_1280.jpg")
+		                no-repeat center center fixed;
+		    background-size: cover;
+		}
 		input {
 		  display: block;
 		  padding: 10px 20px;
@@ -41,24 +46,7 @@
 				<a class="btn btn-basic w3-section" href="/listaapaikat" th:text="#{takaisin}">Peruuta</a>
 			</div>
 		</form>
-		<!--  
-		<form action="#" th:action="@{../tallennapaikka}" th:object="${paivpaikka}" method="post" class=" w3-container w3-card-4 w3-light-grey w3-text-black w3-margin">
-		  	<h1>Lisää uusi liikuntapaikka</h1>
-		  	<br />
-		  	<label for="nimi">Liikuntapaikan nimi: </label>
-		  	<div class="w3-row w3-section">
-			  <div class="w3-col" style="width:50px"></div>	
-			    <div class="w3-rest">
-			      <input class="w3-input w3-border" id="nimi" th:field="${paikka.nimi}" type="text">
-			    </div>
-			</div>
-		    
-		    <div style="padding-top:20px" class="w3-center">
-				<input class="btn btn-success" type="submit" value="Tallenna"/>
-				<a class="btn btn-basic w3-section" href="/listaasuoritukset">Peruuta</a>
-			</div>
-		</form>
-		-->
+
 	</div>
 </body>
 </html>

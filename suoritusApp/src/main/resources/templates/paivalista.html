@@ -7,8 +7,10 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<style>
 		body {
-			background-color:lightgrey;
-		}
+			    background: url("https://cdn.pixabay.com/photo/2016/02/15/11/43/sport-1201014_1280.jpg")
+			                no-repeat center center fixed;
+			    background-size: cover;
+			}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -28,6 +30,10 @@
 		  	<p th:inline="text" style="font-size:16px" sec:authorize="hasAuthority('USER')" >[[${#httpServletRequest.remoteUser}]] <span  th:text="#{kirj.user}">kirjautuneena!</span></p>
 		  	<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('USER')" >
 	            <input type="submit" value="Kirjaudu ulos" class="btn" th:value="#{kirj.ulos}"/>
+	        </form>
+	        <p th:inline="text" style="font-size:16px" sec:authorize="hasAuthority('ADMIN')" >[[${#httpServletRequest.remoteUser}]] <span  th:text="#{kirj.user}">kirjautuneena!</span></p>
+		  	<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('ADMIN')">
+	            <input type="submit" value="Kirjaudu ulos" class="btn" th:value="#{kirj.ulos}" />
 	        </form> 
 	        <div>
 		        <span th:text="#{lang.change}"></span>:
@@ -44,17 +50,20 @@
 		  <span class="w3-tag">xxx</span>
 		</header>
 	
-		<div class="w3-bar w3-black row" style="margin-left:0">
+		<div class="w3-bar w3-black row" style="margin-left:0; align-items:center">
 			<a href="/listaapaivat" class="w3-bar-item w3-button" th:text="#{listaapaivat}">Tunnit päivittäin</a>
 			<a href="/listaapaikat" class="w3-bar-item w3-button" th:text="#{listaapaikat}">Paikat</a>
 			<a href="/lisaasuoritus" class="w3-bar-item w3-button" th:text="#{lisaatunti}">Lisää tunti</a>
 			<a href="/lisaapaikka" class="w3-bar-item w3-button" th:text="#{lisaapaikka}">Lisää paikka</a>
 			<a href="/listaasuoritukset" class="w3-bar-item w3-button" th:text="#{kaikkitunnit}">Kaikki tunnit</a>
         </div>
-        <div class="container" style="background-color:white; padding-top:20px; padding-bottom:5px;">
+        <div class="container" style="background-color:white; padding-top:20px; padding-bottom:15px; text-align:center">
 			<span th:each = "paiva : ${paivat}">
-				<a class="btn btn-success" th:href="@{/listaatunnit/{id}(id=${paiva.viikonpaivaId})}" th:text="${paiva.nimi}"></a>
+				<a class="btn btn-success" th:href="@{/listaatunnit/{id}(id=${paiva.viikonpaivaId})}" th:text="${paiva.nimi}" style="width:100px; text-align:center; margin:Auto"></a>
 			</span>
+			<br /><br />
+			<img src="https://cdn.pixabay.com/photo/2017/08/01/22/44/people-2568410_1280.jpg" alt="jooga" style="width:355px;height:210px;margin-right:15px">
+			<img src="https://cdn.pixabay.com/photo/2017/01/03/08/02/weights-1948837_1280.jpg" alt="pilates" style="width:355px;height:210px">
 		</div>
 	</div>
 </body>

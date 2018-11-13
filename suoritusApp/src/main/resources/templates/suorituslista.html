@@ -7,7 +7,9 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<style>
 		body {
-			background-color:lightgrey;
+		    background: url("https://cdn.pixabay.com/photo/2016/02/15/11/43/sport-1201014_1280.jpg")
+		                no-repeat center center fixed;
+		    background-size: cover;
 		}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -29,6 +31,10 @@
 		  	<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('USER')">
 	            <input type="submit" value="Kirjaudu ulos" class="btn" th:value="#{kirj.ulos}"/>
 	        </form>
+	        <p th:inline="text" style="font-size:16px" sec:authorize="hasAuthority('ADMIN')" >[[${#httpServletRequest.remoteUser}]] <span  th:text="#{kirj.user}">kirjautuneena!</span></p>
+		  	<form th:action="@{/logout}" method="post" sec:authorize="hasAuthority('ADMIN')">
+	            <input type="submit" value="Kirjaudu ulos" class="btn" th:value="#{kirj.ulos}" />
+	        </form> 
 	        <div>
 		        <span th:text="#{lang.change}"></span>:
 				<select id="locales">

@@ -63,9 +63,7 @@ public class SuoritusAppApplication extends WebMvcConfigurerAdapter{
 			log.info("tallenna käyttäjät");
 			//ajetaan tietokantaan käyttäjiä
 			// käyttäjänimi = salasana
-			userRepository.save(new User("veera", "$2a$10$x6X0Fs5DibM5Dj0aY6VPQ.66yrL405zWOOJqth/MZ5mw/.oLv7Ym6", "USER", "veera@veera.com"));
-			userRepository.save(new User("user1", "$2a$10$gOZBXoElzBYwEu6E.FrYlulMI2SdsbPqEktLvrGAEyUVlgKIE4lfG", "USER", "user1@1.com"));
-			userRepository.save(new User("user2", "$2a$10$dipRrajxRQgeNShTmFrqH.YMjQrEbszjTzFiTjpHoeIKypijcYz9e", "USER", "user2@2.com"));
+			userRepository.save(new User("user", "$2a$10$QD.XeuQjUiW1PCunD5vfU.sU.pkdURSwy2ch9jh.vw/dvtw52DpZe", "USER", "user@user.com"));
 			userRepository.save(new User("admin", "$2a$10$QJbRqEQTo0uHF4U3.ac8a.PjUCNCb4pEsiGEIpEgvKyyV9.o6wrzS", "ADMIN", "admin@admin.com"));
 			
 			log.info("tallenna päivät");
