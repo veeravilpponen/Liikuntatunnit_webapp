@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<style>
 		body {
-		    background: url("images/sport-1201014_1280.jpg")
+		    background: url("../images/sport-1201014_1280.jpg")
 		                no-repeat center center fixed;
 		    background-size: cover;
 		}
@@ -60,6 +60,7 @@
 					</tr>
 					<tr th:each = "suoritus : ${suoritukset}">
 						<td th:text = "${suoritus.laji}">laji</td>
+						<td th:text = "${suoritus.viikonpaiva.nimi}">paiva</td>
 						<td th:text = "${suoritus.alkamisaika}">alkamis</td>
 						<td th:text = "${suoritus.loppumisaika}">loppumis</td>
 						<td th:text = "${suoritus.paikka.nimi}">paikka</td>
